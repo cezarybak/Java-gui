@@ -134,11 +134,7 @@ abstract class Spiewak implements Comparable<Spiewak> {
             }else if(compare < 0){
                 return 1;
             } else{
-                    if(this.id > o.id){
-                        return 1;
-                    }else{
-                        return -1;
-                    }
+                    return  this.id - o.id;
                 }
 
         } else {

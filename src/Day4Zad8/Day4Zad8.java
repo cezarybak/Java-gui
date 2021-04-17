@@ -1,61 +1,86 @@
-//package Day4Zad8;
-//
-//import java.util.Iterator;
-//
-//public class Day4Zad8 {
-//        public static void main(String [] args)
-//        {
-//            IterNap napis = new IterNap("prOgrAmoWanIe ObiEktOwe i Gui");
-//
-//            // iteracja po znakach napisu,
-//            // domyślnie zaczynając od pierwszego znaku (o indeksie 0)
-//            // i z krokiem iteracji = 1
-//            for (char z: napis)
-//                System.out.print(z + " ");
-//
-//            System.out.println();
-//            napis.ustawPoczatek(2);     // ustawienie początku iteracji (tu: 2-gi znak, o indeksie 2)
-//            napis.ustawKrok(3);         // ustawienie kroku iteracji (tu: co 3-ci znak)
-//
-//            // iteracja po znakach napisu,
-//            // od ustalonego znaku, z określonym krokiem
-////            for (char z: napis)
-////                System.out.print(z + " ");
-//
-//
-//	/*<-  co tu trzeba napisać w wywołaniu metody forEach z argumentem będącym lambda-wyrażeniem
-//	      w celu wyświetlenia znaków napisu (w postaci małych liter) zgodnie z iteracją
-//
-//	napis.forEach(...)
-//	*/
-//        }
-//    }
-//    class IterNap implements Iterable<Character> {
-//
-//    String name;
-//
-//    public IterNap(String name) {
-//        this.name = name;
-//    }
-//
-//    public void ustawPoczatek(int i) {
-//
-//    }
-//
-//    public void ustawKrok(int
-//                                  i) {
-//    }
-//
-//    };
-//
-//interface Iterator<E> {
-//
-//        boolean hasNext();
-//
-//        E next();
-//
-//
-//
-//        }
-//
-//
+package Day4Zad8;
+
+import java.util.Iterator;
+
+
+public class Day4Zad8 {
+    public static void main(String[] args) {
+
+        IterNap napis = new IterNap("prOgrAmoWanIe ObiEktOwe i Gui");
+
+        Iterator<Character> iterator = napis.iterator();
+
+        while (iterator.hasNext()) {
+            System.out.print(iterator.next() + " ");
+        }
+
+        System.out.println();
+
+        napis.ustawPoczatek(2);
+        napis.ustawKrok(3);
+
+        iterator = napis.iterator();
+
+        while (iterator.hasNext()) {
+            System.out.print(iterator.next() + " ");
+        }
+
+        System.out.println();
+        System.out.println();
+
+        napis.ustawPoczatek(2);
+        iterator = napis.iterator();
+
+        while (iterator.hasNext()) {
+            System.out.print((iterator.next().toString().toLowerCase()) + " ");
+        }
+    }
+
+
+
+
+
+     static class IterNap implements Iterable<Character> {
+        private String input;
+        private int start = 0;
+        private int skip = 1;
+
+        public IterNap(String input) {
+            this.input = input;
+        }
+
+        public void ustawPoczatek(int start) {
+            this.start = start;
+        }
+
+        public void ustawKrok(int skip) {
+            this.skip = skip;
+        }
+
+        @Override
+        public Iterator<Character> iterator() {
+
+            return new Iterator<>() {
+
+                public boolean hasNext() {
+                    if( input.length() >= start + skip){
+                        return  true;
+                    }else {
+                        return false;
+                    }
+                }
+
+                public Character next() {
+                    if (hasNext()) {
+                        char letter = input.charAt(start);
+                        start += skip;
+                        return letter;
+                    } else{
+                        return null;
+                    }
+                }
+            };
+        }
+    }
+}
+
