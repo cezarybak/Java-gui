@@ -31,9 +31,16 @@ public class Day4Zad8 {
         napis.ustawPoczatek(2);
         iterator = napis.iterator();
 
+
+//        napis.forEach((z) ->{System.out.print(z);});
+
         while (iterator.hasNext()) {
             System.out.print((iterator.next().toString().toLowerCase()) + " ");
         }
+
+
+
+
     }
 
 

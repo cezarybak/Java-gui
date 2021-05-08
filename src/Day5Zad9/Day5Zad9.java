@@ -69,20 +69,30 @@ class Referee extends Thread {
         this.players = players;
     }
 
+    public void run(){
+        try {
+            sleep(time * 1000);
+        } catch (InterruptedException e) {
+            return;
+        }
+
+        players[0].interrupt();
+        players[1].interrupt();
+
+    }
+
     void startGame(){
+
+        this.start();
 
 
 
         players[0].start();
         players[1].start();
 
-        try {
-            sleep(time * 1000);
-        } catch (InterruptedException e) {
-            return;
-        }
-        players[0].interrupt();
-        players[1].interrupt();
+
+
+
 
 
     }
